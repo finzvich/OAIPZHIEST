@@ -1,0 +1,73 @@
+using System;
+class HelloWorld 
+  {
+        static void Main(string[] args)
+        {
+            Console.Write("Количество строк матрицы MTC1: ");
+            int n1 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Количество столбцов матрицы MTC1: ");
+            int m1 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Количество строк матрицы MTC2: ");
+            int n2 = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Количество столбцов матрицы MTC2: ");
+            int m2 = Convert.ToInt32(Console.ReadLine());
+            int[,] MTC1 = new int[n1, m1];
+            int[,] MTC2 = new int[n2, m2];
+            int[,] MTC3 = new int[n1, m2]; 
+            funcMTC1(MTC1, n1, m1);
+            Console.WriteLine("MTC1");
+            OutputMTC1(MTC1, n1, m1);
+            funcMTC1(MTC2, n2, m2);
+            Console.WriteLine("MTC2");
+            OutputMTC1(MTC2, n2, m2);
+            Console.WriteLine("MTC3");
+            MTC3YMNOZH(MTC1, MTC2, MTC3, n1, m1, n2, m2);
+            Console.ReadKey();
+        }
+        static void funcMTC1(int[,] mt, int n, int m)
+        {
+            Random rnd = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    mt[i, j] = rnd.Next(0, 10);
+                }
+            }
+        }
+        static void OutputMTC1(int[,] mt, int n, int m)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(mt[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+        static void MTC3YMNOZH(int[,] MTC1, int[,] MTC2, int[,] MTC3, int n1, int m1, int n2, int m2)
+        {
+            if (n1 == m2)
+            {
+                for (int i = 0; i < n1; i++)
+                {
+                    for (int j = 0; j < m2; j++)
+                    {
+                        MTC3[i, j] = 0;
+                        for (int y = 0; y < m1; y++)
+                        {
+                            MTC3[i, j] += MTC1[i, y] * MTC2[y, j];
+                        }
+                        Console.Write(MTC3[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Нельзя перемножать матрицы с неидентичным количеством строк и столбцов");
+            }
+        }
+    }
